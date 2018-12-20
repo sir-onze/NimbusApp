@@ -222,7 +222,7 @@ public class EmployeeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
     // ORDER BUTTON
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        OrderFrame21 ef = new OrderFrame21(this.nimbus);
+        OrderFrame1 ef = new OrderFrame1(this.nimbus);
         ef.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
