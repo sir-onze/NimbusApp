@@ -1,15 +1,17 @@
 package nimbus.interaction;
 
 import nimbus.business.NimbusFacade;
+import nimbus.business.OrderHandler.Client;
+import nimbus.business.OrderHandler.Order;
 
-public class OrderFrame22 extends javax.swing.JFrame {
+public class OrderFrame2 extends javax.swing.JFrame {
     
     private NimbusFacade nimbus;
-    private String model;
-    
-    public OrderFrame22(NimbusFacade nimbus) {
+    private Client user;
+    public OrderFrame2(NimbusFacade nimbus,Client user) {
         initComponents();
         this.nimbus = nimbus;
+        this.user = user;
         jTextField1.setText(nimbus.getEmployee().getUsername());
     }
 
@@ -234,7 +236,8 @@ public class OrderFrame22 extends javax.swing.JFrame {
 
    //COMBOBOX DO MODELO
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        
+        String x = String.valueOf(jComboBox2.getSelectedItem());
+        System.out.println(x);
     }//GEN-LAST:event_jComboBox2ActionPerformed
     //COMBOBOX DA PINTURA
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed

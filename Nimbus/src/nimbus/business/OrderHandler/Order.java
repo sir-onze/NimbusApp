@@ -7,6 +7,7 @@ public class Order {
     private int orderID;
     private String state;
     private String employeeUsername;
+    private Client username;
     
     private String modelName;
     private String paint;
@@ -16,10 +17,10 @@ public class Order {
     private ArrayList<String> interiorDetails;
     private ArrayList<String> exteriorDetails;
     
-    public Order(int oId, String state, String eU, String modelName,
+    public Order(Client user,int oId, String state, String eU, String modelName,
                     String paint, String tires, String wheels,
                     String engine, ArrayList<String> intD, ArrayList<String> extD){
-        
+        this.username =user;
         this.orderID = oId;
         this.state = state;
         this.employeeUsername = eU;
