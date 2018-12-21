@@ -187,7 +187,7 @@ public class OrderFrame12 extends javax.swing.JFrame {
             enc.setVisible(true);
             this.setVisible(false);
           }
-          catch(ClienteInvalidoException e){
+          catch(InvalidClientException e){
               jLabel9.setText("Cliente Inexistente");
           }
 

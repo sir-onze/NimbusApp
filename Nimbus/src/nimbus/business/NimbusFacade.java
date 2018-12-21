@@ -1,6 +1,6 @@
 package nimbus.business;
 
-import nimbus.business.OrderHandler.ClienteInvalidoException;
+import nimbus.business.OrderHandler.InvalidClientException;
 import nimbus.business.OrderHandler.*;
 import nimbus.business.EmployeeHandler.*;
 
@@ -38,11 +38,11 @@ public class NimbusFacade{
         emplH.addEmployee(user, pass);
     }
     
-    public void addClient(String name,String morada,String mail,int telemovel,int nif) throws ClienteInvalidoException{
+    public void addClient(String name,String morada,String mail,int telemovel,int nif) throws InvalidClientException{
         ordH.addClient(name,morada,mail,telemovel,nif);
     }
     
-    public Client getClient(String nome) throws ClienteInvalidoException{
+    public Client getClient(String nome) throws InvalidClientException{
         return ordH.getClient(nome);
     }
   

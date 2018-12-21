@@ -233,7 +233,7 @@ public class OrderFrame11 extends javax.swing.JFrame {
           try{
               this.nimbus.addClient(name, morada, mail, telemovel, nif);
           }
-          catch(ClienteInvalidoException e ){
+          catch(InvalidClientException e ){
               jLabel9.setText("Cliente já existente ");
           }
           OrderFrame2 enc = new OrderFrame2(this.nimbus,user);
