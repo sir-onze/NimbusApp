@@ -40,5 +40,9 @@ public class NimbusFacade{
     public void addClient(String name,String morada,String mail,int telemovel,int nif){
         ordH.addClient(name,morada,mail,telemovel,nif);
     }
+    
+    public Client getClient(String nome){
+        return ordH.getClient(nome);
+    }
   
 }

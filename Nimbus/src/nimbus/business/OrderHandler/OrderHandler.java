@@ -23,5 +23,9 @@ public class OrderHandler {
         }
     }
     
+    public Client getClient(String name){
+        return cliDao.get(name);
+    }
+    
     
 }

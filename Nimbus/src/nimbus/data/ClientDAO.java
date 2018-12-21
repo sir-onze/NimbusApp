@@ -21,7 +21,7 @@ import nimbus.business.OrderHandler.Client;
  */
 public class ClientDAO implements Map <String,Client>{
     private Connection connection;
-    private Employee empl;
+    private Client cli;
     private boolean res = false;
     
     @Override
@@ -66,7 +66,28 @@ public class ClientDAO implements Map <String,Client>{
 
     @Override
     public Client get(Object key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+              
+        try{
+            this.connection = Database.connect();
+            PreparedStatement state = connection.prepareStatement("SELECT * FROM Cliente WHERE nome=?");
+            state.setString(1,(String)key);
+            ResultSet rs = state.executeQuery();
+            if(rs.next()){
+                this.cli = new Client(rs.getString("nome"),rs.getString("morada"),rs.getString("mail"),rs.getInt("telemovel"),rs.getInt("nif"));
+            }
+        }
+        catch(SQLException e){
+            System.out.printf(e.getMessage());
+        }
+        finally{
+            try{
+                Database.close(connection);
+            }
+            catch(Exception e){
+                System.out.printf(e.getMessage());
+            }
+        }
+        return this.cli;
     }
 
     @Override

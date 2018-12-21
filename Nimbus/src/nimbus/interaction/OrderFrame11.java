@@ -237,7 +237,6 @@ public class OrderFrame11 extends javax.swing.JFrame {
       }
       else if(name.equals("") || jTextField1.getText().equals("") || jTextField2.getText().equals("") || jTextField4.getText().equals("") || jTextField6.getText().equals("")){
        jLabel9.setText("Preencha todos os campos corretamente ");
-       System.out.println("puta");
       }
 
     }//GEN-LAST:event_jButton4ActionPerformed
