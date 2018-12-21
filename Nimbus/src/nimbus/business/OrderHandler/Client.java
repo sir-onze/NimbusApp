@@ -24,5 +24,16 @@ public class Client {
         this.nif=nif;
     }
     
+    /* getters */
+    
+    public String getNome(){ return this.nome; }
+    
+    public int getNif(){ return this.nif; }
+    
+    public int getTelemovel(){ return this.telemovel; }
+    
+    public String getMorada(){ return this.morada; }
+    
+    public String getMail(){ return this.mail; }
     
 }

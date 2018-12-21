@@ -10,7 +10,7 @@
  */
 package nimbus.interaction;
 import nimbus.business.*;
-import nimbus.business.OrderHandler.Client;
+import nimbus.business.OrderHandler.*;
 
 public class OrderFrame11 extends javax.swing.JFrame {
     
@@ -230,14 +230,18 @@ public class OrderFrame11 extends javax.swing.JFrame {
           int nif = Integer.parseInt(jTextField1.getText());
           int telemovel = Integer.parseInt(jTextField4.getText());
           Client user = new Client(name,morada,mail,telemovel,nif);
-          
+          try{
+              this.nimbus.addClient(name, morada, mail, telemovel, nif);
+          }
+          catch(ClienteInvalidoException e ){
+              jLabel9.setText("Cliente já existente ");
+          }
           OrderFrame2 enc = new OrderFrame2(this.nimbus,user);
           enc.setVisible(true);
           this.setVisible(false);
       }
       else if(name.equals("") || jTextField1.getText().equals("") || jTextField2.getText().equals("") || jTextField4.getText().equals("") || jTextField6.getText().equals("")){
        jLabel9.setText("Preencha todos os campos corretamente ");
-       System.out.println("puta");
       }
 
     }//GEN-LAST:event_jButton4ActionPerformed
