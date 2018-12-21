@@ -76,7 +76,11 @@
                           </Group>
                       </Group>
                   </Group>
+<<<<<<< HEAD
                   <EmptySpace pref="101" max="32767" attributes="0"/>
+=======
+                  <EmptySpace pref="119" max="32767" attributes="0"/>
+>>>>>>> 70d8fde3b0aaec6ee20d01a1082e8b00be63656c
                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
               </Group>
@@ -268,12 +272,20 @@
         <Component class="javax.swing.JComboBox" name="jComboBox4">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+<<<<<<< HEAD
               <StringArray count="5">
                 <StringItem index="0" value="..."/>
                 <StringItem index="1" value="Toyo Tiros"/>
                 <StringItem index="2" value="Mixel"/>
                 <StringItem index="3" value="Goodbeer"/>
                 <StringItem index="4" value="Mabor"/>
+=======
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+>>>>>>> 70d8fde3b0aaec6ee20d01a1082e8b00be63656c
               </StringArray>
             </Property>
           </Properties>
@@ -303,10 +315,17 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
+<<<<<<< HEAD
                 <StringItem index="0" value="..."/>
                 <StringItem index="1" value="Standard"/>
                 <StringItem index="2" value="Cromado"/>
                 <StringItem index="3" value="Ba&#xe7;o"/>
+=======
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+>>>>>>> 70d8fde3b0aaec6ee20d01a1082e8b00be63656c
               </StringArray>
             </Property>
           </Properties>
@@ -339,7 +358,11 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
+<<<<<<< HEAD
             <Property name="text" type="java.lang.String" value="IMAGEM ?"/>
+=======
+            <Property name="text" type="java.lang.String" value="jLabel7"/>
+>>>>>>> 70d8fde3b0aaec6ee20d01a1082e8b00be63656c
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox7">

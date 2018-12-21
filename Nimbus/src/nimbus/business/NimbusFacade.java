@@ -45,5 +45,24 @@ public class NimbusFacade{
     public Client getClient(String nome) throws InvalidClientException{
         return ordH.getClient(nome);
     }
+    
+    public int consultStock(String nome) throws InvalidComponentException{
+        return ordH.consultStock(nome);
+        
+    }
+    public void addComponent(String nome,int quantidade,float preco) throws InvalidComponentException{
+        ordH.addComponent(nome,quantidade,preco);
+    }
+    
+    public Component getComponent(String nome) throws InvalidComponentException{
+        return ordH.getComponent(nome);
+    }
+    
+    public void updateStock(String nome,int stock) throws InvalidComponentException{
+        ordH.updateStock(nome,stock);
+    }
+    public void removeComponent(String nome)throws InvalidComponentException{
+        ordH.removeComponent(nome);
+    }
   
 }

@@ -5,6 +5,7 @@
  */
 package nimbus.business.OrderHandler;
 import nimbus.data.ClientDAO;
+import nimbus.data.ComponentDAO;
 /**
  *
  * @author macz
@@ -12,9 +13,11 @@ import nimbus.data.ClientDAO;
 public class OrderHandler {
     private ClientDAO cliDao;
     //private OrderDAO ordDao;
+    private ComponentDAO compDao;
     
     public OrderHandler(){
         this.cliDao= new ClientDAO();
+        this.compDao = new ComponentDAO();
     }
     public void addClient(String name,String morada,String mail,int telemovel,int nif) throws InvalidClientException{
         if(!this.cliDao.containsKey(name)){
@@ -29,6 +32,47 @@ public class OrderHandler {
         return cliDao.get(name);
         else throw new InvalidClientException();
     }
+    
+     public int consultStock(String nome) throws InvalidComponentException{
+         int stock=0;
+         Component c;
+         if(compDao.containsKey(nome)){
+             c = compDao.get(nome);
+             System.out.println(c.getName());
+             stock = c.getStock();
+         }
+         else throw new InvalidComponentException ();
+         return stock;
+     }
+     
+     public void addComponent(String nome,int quantidade,float preco) throws InvalidComponentException{
+          if(!compDao.containsKey(nome)){
+              Component c = new Component(nome,quantidade,preco);
+              compDao.put(nome,c);
+         }
+         else throw new InvalidComponentException ();
+     }
+     
+     public Component getComponent(String nome) throws InvalidComponentException{
+          Component c=null;
+         if(!compDao.containsKey(nome)){
+             c =compDao.get(nome);
+         }
+         else throw new InvalidComponentException ();
+         return c;
+     }
+     
+     public void updateStock(String nome,int stock) throws InvalidComponentException{
+         if(!compDao.containsKey(nome)){
+            compDao.update(nome, stock);
+         }
+     }
+     
+     public void removeComponent(String nome)throws InvalidComponentException{
+          if(compDao.containsKey(nome)){
+            compDao.remove(nome);
+         }
+     }
     
     
 }
