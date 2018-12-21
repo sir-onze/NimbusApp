@@ -180,10 +180,17 @@ public class OrderFrame12 extends javax.swing.JFrame {
       if(nome.equals("")) jLabel9.setText("Preencha o campo obrigatório");
       
       else{
-            Client c =nimbus.getClient(nome);
+          Client c;
+          try{
+            c =nimbus.getClient(nome);
             OrderFrame2 enc = new OrderFrame2(this.nimbus,c);
             enc.setVisible(true);
             this.setVisible(false);
+          }
+          catch(ClienteInvalidoException e){
+              jLabel9.setText("Cliente Inexistente");
+          }
+
       }
     
     }//GEN-LAST:event_jButton4ActionPerformed
