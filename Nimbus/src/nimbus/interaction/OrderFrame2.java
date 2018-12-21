@@ -1,15 +1,18 @@
 package nimbus.interaction;
 
 import nimbus.business.NimbusFacade;
+import nimbus.business.OrderHandler.Client;
 
 public class OrderFrame2 extends javax.swing.JFrame {
     
     private NimbusFacade nimbus;
     private String model;
+    private Client user;
     
-    public OrderFrame2(NimbusFacade nimbus) {
+    public OrderFrame2(NimbusFacade nimbus,Client user) {
         initComponents();
         this.nimbus = nimbus;
+        this.user = user;
         jTextField1.setText(nimbus.getEmployee().getUsername());
     }
 
@@ -43,7 +46,6 @@ public class OrderFrame2 extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 500));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
