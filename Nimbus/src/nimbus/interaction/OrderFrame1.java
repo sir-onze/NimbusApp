@@ -179,7 +179,7 @@ public class OrderFrame1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        OrderFrame12 login = new OrderFrame12(this.nimbus);
+        EmployeeFrame login = new EmployeeFrame(this.nimbus);
         login.setVisible(true);
         this.setVisible(false);
         
