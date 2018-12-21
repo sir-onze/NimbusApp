@@ -7,12 +7,13 @@ public class NimbusFacade{
     
     private Employee empl;
     private EmployeeHandler emplH;
-    private OrderHandler encomenda_action;
+    private OrderHandler ordH;
     
     public NimbusFacade(){
         
         this.empl = null;
         this.emplH = new EmployeeHandler();
+        this.ordH = new OrderHandler();
         //this.encomenda_action = new EncomendaAction();
     }
     
@@ -34,6 +35,10 @@ public class NimbusFacade{
     
     public void addEmployee(String user, String pass) throws InvalidUsernameException{
         emplH.addEmployee(user, pass);
+    }
+    
+    public void addClient(String name,String morada,String mail,int telemovel,int nif){
+        ordH.addClient(name,morada,mail,telemovel,nif);
     }
   
 }

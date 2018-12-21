@@ -10,7 +10,7 @@
  */
 package nimbus.interaction;
 import nimbus.business.*;
-import nimbus.business.OrderHandler.Client;
+import nimbus.business.OrderHandler.*;
 
 public class OrderFrame11 extends javax.swing.JFrame {
     
@@ -230,7 +230,7 @@ public class OrderFrame11 extends javax.swing.JFrame {
           int nif = Integer.parseInt(jTextField1.getText());
           int telemovel = Integer.parseInt(jTextField4.getText());
           Client user = new Client(name,morada,mail,telemovel,nif);
-          
+          this.nimbus.addClient(name, morada, mail, telemovel, nif);
           OrderFrame2 enc = new OrderFrame2(this.nimbus,user);
           enc.setVisible(true);
           this.setVisible(false);
