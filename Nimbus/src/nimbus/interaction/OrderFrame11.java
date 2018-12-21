@@ -1,23 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author macz
- */
 package nimbus.interaction;
+
 import nimbus.business.*;
 import nimbus.business.OrderHandler.*;
 
 public class OrderFrame11 extends javax.swing.JFrame {
     
     private NimbusFacade nimbus;
-    /**
-     * Creates new form OrderFrame11
-     */
+    
     public OrderFrame11(NimbusFacade nimbus) {
         this.nimbus = nimbus;
         initComponents();
@@ -233,7 +222,7 @@ public class OrderFrame11 extends javax.swing.JFrame {
           try{
               this.nimbus.addClient(name, morada, mail, telemovel, nif);
           }
-          catch(ClienteInvalidoException e ){
+          catch(InvalidClientException e ){
               jLabel9.setText("Cliente já existente ");
           }
           OrderFrame2 enc = new OrderFrame2(this.nimbus,user);

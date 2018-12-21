@@ -144,7 +144,7 @@ public class OrderFrame2 extends javax.swing.JFrame {
             }
         });
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Toyo Tiros", "Mixel", "Goodbeer", "Mabor" }));
         jComboBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox4ActionPerformed(evt);
@@ -158,7 +158,7 @@ public class OrderFrame2 extends javax.swing.JFrame {
             }
         });
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Standard", "Cromado", "Baço" }));
         jComboBox6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox6ActionPerformed(evt);
@@ -173,7 +173,7 @@ public class OrderFrame2 extends javax.swing.JFrame {
 
         jLabel6.setText("Jantes");
 
-        jLabel7.setText("jLabel7");
+        jLabel7.setText("IMAGEM ?");
 
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Branco", "Preto", "Vermelho", "Azul", "Cinzento" }));
         jComboBox7.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +211,7 @@ public class OrderFrame2 extends javax.swing.JFrame {
                             .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addGap(76, 76, 76))
         );
@@ -296,26 +296,29 @@ public class OrderFrame2 extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox3ActionPerformed
     //COMBOBOX DOS PNEUS
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        // TODO add your handling code here:
+        this.tires = String.valueOf(jComboBox4.getSelectedItem());
     }//GEN-LAST:event_jComboBox4ActionPerformed
     private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox5ActionPerformed
-
+    //NEXT FRAME
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        this.nimbus.logout();
-        InitialFrame i = new InitialFrame(this.nimbus);
-        i.setVisible(true);
+        OrderFrame3 nf;
+        nf = new OrderFrame3(this.user, this.nimbus, this.model, this.engine, this.paint, this.wheels, this.tires);
+        nf.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    //GO BACK
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        OrderFrame12 nf;
+        nf = new OrderFrame12(this.nimbus);
+        nf.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
     //COMBOBOX DAS JANTES
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
-        // TODO add your handling code here:
+        this.wheels = String.valueOf(jComboBox6.getSelectedItem());
     }//GEN-LAST:event_jComboBox6ActionPerformed
     // COMBOBOX DA PINTURA
     private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed

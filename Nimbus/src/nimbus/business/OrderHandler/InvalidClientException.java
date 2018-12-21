@@ -9,6 +9,6 @@ package nimbus.business.OrderHandler;
  *
  * @author macz
  */
-public class ClienteInvalidoException extends Exception {
+public class InvalidClientException extends Exception {
     
 }

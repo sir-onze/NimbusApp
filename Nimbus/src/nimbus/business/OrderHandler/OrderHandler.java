@@ -16,18 +16,18 @@ public class OrderHandler {
     public OrderHandler(){
         this.cliDao= new ClientDAO();
     }
-    public void addClient(String name,String morada,String mail,int telemovel,int nif) throws ClienteInvalidoException{
+    public void addClient(String name,String morada,String mail,int telemovel,int nif) throws InvalidClientException{
         if(!this.cliDao.containsKey(name)){
             Client c = new Client(name,morada,mail,telemovel,nif);
             cliDao.put(name,c);
         }
-        else throw new ClienteInvalidoException();
+        else throw new InvalidClientException();
     }
     
-    public Client getClient(String name) throws ClienteInvalidoException{
+    public Client getClient(String name) throws InvalidClientException{
         if(this.cliDao.containsKey(name))
         return cliDao.get(name);
-        else throw new ClienteInvalidoException();
+        else throw new InvalidClientException();
     }
     
     
