@@ -7,7 +7,9 @@ import nimbus.business.OrderHandler.Order;
 public class OrderFrame2 extends javax.swing.JFrame {
     
     private NimbusFacade nimbus;
+    private String model;
     private Client user;
+    
     public OrderFrame2(NimbusFacade nimbus,Client user) {
         initComponents();
         this.nimbus = nimbus;
@@ -126,7 +128,6 @@ public class OrderFrame2 extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lestrange(Modelo Económico)", "Weasley(Modelo Família)", "Sirius(Modelo Gama Média)", "Albus Severus(Modelo Gama Alta)" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -156,7 +157,7 @@ public class OrderFrame2 extends javax.swing.JFrame {
 
         jLabel1.setText("Modelo");
 
-        jLabel4.setText("Pintura");
+        jLabel4.setText("Motor");
 
         jLabel5.setText("Pneus");
 
@@ -203,18 +204,19 @@ public class OrderFrame2 extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -236,12 +238,36 @@ public class OrderFrame2 extends javax.swing.JFrame {
 
    //COMBOBOX DO MODELO
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        jComboBox2.addItem("Lestrange(Modelo Económico)");
+        jComboBox2.addItem("Weasly(Modelo Família)");
+        jComboBox2.addItem("Sirius(Modelo Gama Média)");
+        jComboBox2.addItem("Albus Severus(Modelo Gama Alta)");
+        
         String x = String.valueOf(jComboBox2.getSelectedItem());
-        System.out.println(x);
+        this.model = x;
     }//GEN-LAST:event_jComboBox2ActionPerformed
     //COMBOBOX DA PINTURA
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        // TODO add your handling code here:
+        switch (this.model) {
+            case "Lestrange(ModeloEconómico)":
+                jComboBox3.addItem("1.0 TDCI 85c");
+                jComboBox3.addItem("1.1 Ti-VCT 85c");
+                jComboBox3.addItem("1.5 ECOBOOST 100c");
+                break;
+            case "Weasley(Modelo Família)":
+                jComboBox3.addItem("1.0 ECOBOOST 100c");
+                jComboBox3.addItem("1.5 TDCI 120c");
+                break;
+            case "Sirius(Modelo Gama Média)":
+                jComboBox3.addItem("2.3 ECOBOOST 290c");
+                jComboBox3.addItem("5.0 Ti-VCT 400c");
+                break;
+            case "Albus Severus(Modelo Gama Alta)":
+                jComboBox3.addItem("3.5 ECOBOOST V6 647c");
+                break;
+            default:
+                break;
+        }
     }//GEN-LAST:event_jComboBox3ActionPerformed
     //COMBOBOX DOS PNEUS
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
