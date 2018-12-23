@@ -38,7 +38,7 @@ public class ComponentDAO implements Map <String,Component> {
     public boolean containsKey(Object key) {
         try{
             this.connection = Database.connect();
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM Componentes WHERE nome = ?");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM Componente WHERE nome = ?");
             ps.setString(1,(String) key);
             ResultSet rs = ps.executeQuery();
             // fazemos next e vai dar true pq já nao tem mais nada para a frente; caso nao tenha  nada vai dar exception 
@@ -67,7 +67,7 @@ public class ComponentDAO implements Map <String,Component> {
     public Component get(Object key) {
         try{
             this.connection = Database.connect();
-            PreparedStatement state = connection.prepareStatement("SELECT * FROM Componentes WHERE nome=?");
+            PreparedStatement state = connection.prepareStatement("SELECT * FROM Componente WHERE nome=?");
             state.setString(1,(String)key);
             ResultSet rs = state.executeQuery();
             if(rs.next()){
@@ -93,7 +93,7 @@ public class ComponentDAO implements Map <String,Component> {
         
         try{
             this.connection = Database.connect();
-            PreparedStatement state = connection.prepareStatement("INSERT INTO Componentes (nome,stock,preco) VALUES(?,?,?)");
+            PreparedStatement state = connection.prepareStatement("INSERT INTO Componente (nome,stock,preco) VALUES(?,?,?)");
             state.setString(1,(String)key);
             state.setInt(2,(int)value.getStock());
             state.setFloat(3,(float)value.getPrice());
@@ -118,7 +118,7 @@ public class ComponentDAO implements Map <String,Component> {
                 
         try{
             this.connection = Database.connect();
-            PreparedStatement state = connection.prepareStatement("DELETE FROM Componentes WHERE nome=?");
+            PreparedStatement state = connection.prepareStatement("DELETE FROM Componente WHERE nome=?");
             state.setString(1,(String)key);
             state.executeUpdate();
         }
@@ -164,7 +164,7 @@ public class ComponentDAO implements Map <String,Component> {
     public void update(String name,int stock){
         try{
             this.connection = Database.connect();
-            PreparedStatement state = connection.prepareStatement("UPDATE Componentes SET stock=? WHERE nome=?");
+            PreparedStatement state = connection.prepareStatement("UPDATE Componente SET stock=? WHERE nome=?");
             state.setInt(1,(int)stock);
             state.setString(2,(String)name);
             state.executeUpdate();

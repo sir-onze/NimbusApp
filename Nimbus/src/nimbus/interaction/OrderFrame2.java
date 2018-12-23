@@ -3,6 +3,7 @@ package nimbus.interaction;
 import nimbus.business.NimbusFacade;
 import nimbus.business.OrderHandler.Client;
 
+
 public class OrderFrame2 extends javax.swing.JFrame {
     
     private NimbusFacade nimbus;
@@ -269,7 +270,7 @@ public class OrderFrame2 extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox2ActionPerformed
     //COMBOBOX DO MOTOR
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        if(this.b){
+    if(this.b){
             switch (this.model) {
                     case "Lestrange(Modelo Económico)":
                         this.jComboBox3.addItem("1.0 TDCI 85c");

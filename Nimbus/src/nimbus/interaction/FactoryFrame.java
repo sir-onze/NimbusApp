@@ -322,6 +322,7 @@ public class FactoryFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+      jLabel6.setText("");
       String nome = jTextField2.getText();
       if(nome.equals("")) jLabel6.setText("Preencha os campos obrigatórios");
        else{
@@ -330,6 +331,7 @@ public class FactoryFrame extends javax.swing.JFrame {
             jTextField2.setText("");
             jTextField3.setText("");
             jTextField5.setText("");
+            jLabel6.setText("Componente removido");
             }
             catch(InvalidComponentException e){
                     jLabel6.setText("Componente inexistente");
@@ -339,31 +341,34 @@ public class FactoryFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jLabel6.setText("");
         String nome = jTextField2.getText();
         String aux_stock = jTextField3.getText();
         
-         if(nome.equals("") || aux_stock.equals("")) jLabel6.setText("Preencha os campos obrigatórios");
-         else{
-            try{
+         if(!nome.equals("") && !aux_stock.equals("")){
+             try{
            int stock = Integer.parseInt(aux_stock);
-           Component c = this.nimbus.getComponent(nome);
-           this.nimbus.removeComponent(nome);
-           stock = c.getStock()+stock;
-           float preco = c.getPrice();
-           this.nimbus.addComponent(nome,stock,preco);
-           jTextField3.setText(Integer.toString(stock));
-           
+           this.nimbus.updateStock(nome, stock);
+           jTextField3.setText("");
+           jTextField3.setText(String.valueOf(stock));
+           jLabel6.setText("Stock adicionado");
+           jTextField2.setText("");
+           jTextField3.setText("");
+           jTextField5.setText("");
             }
             catch(InvalidComponentException e){
                     jLabel6.setText("Componente inexistente");
                     }
+         }
+         else jLabel6.setText("Preencha os campos obrigatórios");{
+            
          }
    
  
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+        jLabel6.setText("");
         this.nimbus.logout();
         InitialFrame i = new InitialFrame(this.nimbus);
         i.setVisible(true);
@@ -375,7 +380,8 @@ public class FactoryFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-      String nome = jTextField2.getText();
+        jLabel6.setText("");
+        String nome = jTextField2.getText();
       if(!nome.equals(""))
         try{
           int stock = this.nimbus.consultStock(nome);
@@ -389,7 +395,8 @@ public class FactoryFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-       String nome = jTextField2.getText();
+     jLabel6.setText("");
+     String nome = jTextField2.getText();
      String aux_quantidade = jTextField3.getText();
      String aux_preco =jTextField5.getText();
      if(nome.equals("") || aux_quantidade.equals("") || aux_preco.equals("")) jLabel6.setText("Preencha os campos obrigatórios");

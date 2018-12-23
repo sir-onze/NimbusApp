@@ -55,7 +55,7 @@ public class OrderHandler {
      
      public Component getComponent(String nome) throws InvalidComponentException{
           Component c=null;
-         if(!compDao.containsKey(nome)){
+         if(compDao.containsKey(nome)){
              c =compDao.get(nome);
          }
          else throw new InvalidComponentException ();
@@ -63,8 +63,9 @@ public class OrderHandler {
      }
      
      public void updateStock(String nome,int stock) throws InvalidComponentException{
-         if(!compDao.containsKey(nome)){
-            compDao.update(nome, stock);
+         if(compDao.containsKey(nome)){
+            int r = stock + compDao.get(nome).getStock();
+            compDao.update(nome, r);
          }
      }
      
