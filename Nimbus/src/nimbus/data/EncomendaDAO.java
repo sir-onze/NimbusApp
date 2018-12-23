@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package nimbus.data;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Map;
@@ -48,7 +48,10 @@ public class EncomendaDAO implements Map <String,Order> {
 
     @Override
     public Order put(String key, Order value) {
-    return null;
+        
+        
+    
+        return null;
     }
     
 
@@ -82,15 +85,29 @@ public class EncomendaDAO implements Map <String,Order> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-      public void putList(String key, Order value) {
-                 
+      public int putList (boolean sportSeats, String pack, boolean soundSystem, boolean centralConsole, boolean interiorLightsRGB, boolean passengersDVD, boolean smokedWindows, boolean exhaust, boolean spoiler, boolean starlight, boolean bycicleSupport, boolean externalNeonLeds ) {
+        int r=-1;
         try{
             this.connection = Database.connect();
             PreparedStatement state = connection.prepareStatement("INSERT INTO ListaComponente (bancos,Pacote_nome,som,consola,luzes,leitor,vidros,escape,spoiler,teto,suporte,leds) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-            state.setString(1,(String)key);
-           // state.setInt(2,(int)value.getStock());
-           // state.setFloat(3,(float)value.getPrice());
+            state.setInt(1,boolToInt(sportSeats));
+            state.setString(2,pack);
+            state.setInt(3,boolToInt(soundSystem));
+            state.setInt(4,boolToInt(centralConsole));
+            state.setInt(5,boolToInt(interiorLightsRGB));
+            state.setInt(6,boolToInt(passengersDVD));
+            state.setInt(7,boolToInt(smokedWindows));
+            state.setInt(8,boolToInt(exhaust));
+            state.setInt(9,boolToInt(spoiler));
+            state.setInt(10,boolToInt(starlight));
+            state.setInt(11,boolToInt(bycicleSupport));
+            state.setInt(12,boolToInt(externalNeonLeds));
             state.executeUpdate();
+            
+            state = connection.prepareStatement("SELECT id_lista FROM ListaComponente ORDER BY id_lista DESC LIMIT 0, 1;");
+            ResultSet rs = state.executeQuery();
+            r = rs.getInt("id_lista");
+            
         }
         catch(SQLException e){
             System.out.printf(e.getMessage());
@@ -103,7 +120,13 @@ public class EncomendaDAO implements Map <String,Order> {
                 System.out.printf(e.getMessage());
             }
         }
-       
+       return r; 
     }
+     
+    
+       public int boolToInt(boolean b){
+         return b ? 1 : 0;
+     }
+  
     //INSERT INTO ListaComponente (bancos,Pacote_nome,som,consola,luzes,leitor,vidros,escape,spoiler,teto,suporte,leds) VALUES (0,'nice',1,0,1,1,0,1,0,1,0,1);
 }
