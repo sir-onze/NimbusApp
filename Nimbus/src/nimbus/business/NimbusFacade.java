@@ -64,5 +64,13 @@ public class NimbusFacade{
     public void removeComponent(String nome)throws InvalidComponentException{
         ordH.removeComponent(nome);
     }
+    
+    public int putList (boolean sportSeats, String pack, boolean soundSystem, boolean centralConsole, boolean interiorLightsRGB, boolean passengersDVD, boolean smokedWindows, boolean exhaust, boolean spoiler, boolean starlight, boolean bycicleSupport, boolean externalNeonLeds ){
+        return ordH.putList(sportSeats,pack,soundSystem,centralConsole,interiorLightsRGB, passengersDVD,smokedWindows,exhaust,spoiler, starlight, bycicleSupport, externalNeonLeds);
+    }
+    
+     public int getListId(){
+         return ordH.getListId();
+     }
   
 }

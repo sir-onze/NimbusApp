@@ -17,7 +17,7 @@ import nimbus.business.OrderHandler.Order;
  *
  * @author macz
  */
-public class EncomendaDAO implements Map <String,Order> {
+public class OrderDAO implements Map <String,Order> {
     private Connection connection;
     private Order ord;
     private boolean res = false;
@@ -104,10 +104,6 @@ public class EncomendaDAO implements Map <String,Order> {
             state.setInt(12,boolToInt(externalNeonLeds));
             state.executeUpdate();
             
-            state = connection.prepareStatement("SELECT id_lista FROM ListaComponente ORDER BY id_lista DESC LIMIT 0, 1;");
-            ResultSet rs = state.executeQuery();
-            r = rs.getInt("id_lista");
-            
         }
         catch(SQLException e){
             System.out.printf(e.getMessage());
@@ -122,7 +118,31 @@ public class EncomendaDAO implements Map <String,Order> {
         }
        return r; 
     }
-     
+    
+    public int getListId(){
+        int r=-1;
+            try{
+            this.connection = Database.connect();
+            PreparedStatement state = connection.prepareStatement("SELECT id_lista FROM ListaComponente ORDER BY id_lista DESC LIMIT 0, 1;");
+            ResultSet rs = state.executeQuery();
+            if(rs.next()){
+            r = rs.getInt("id_lista");
+            }
+            
+        }
+        catch(SQLException e){
+            System.out.printf(e.getMessage());
+        }
+        finally{
+            try{
+                Database.close(connection);
+            }
+            catch(Exception e){
+                System.out.printf(e.getMessage());
+            }
+    }
+            return r;
+    }
     
        public int boolToInt(boolean b){
          return b ? 1 : 0;

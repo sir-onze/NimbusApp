@@ -40,6 +40,8 @@ public class OrderFrame3 extends javax.swing.JFrame {
         this.paint = paint;
         this.tires = tires;
         this.wheels = wheels;
+        this.interiorPackage=null;
+        this.exteriorPackage=null;
     }
 
     /**

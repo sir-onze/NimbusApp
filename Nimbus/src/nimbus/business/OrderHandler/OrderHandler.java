@@ -6,18 +6,20 @@
 package nimbus.business.OrderHandler;
 import nimbus.data.ClientDAO;
 import nimbus.data.ComponentDAO;
+import nimbus.data.OrderDAO;
 /**
  *
  * @author macz
  */
 public class OrderHandler {
     private ClientDAO cliDao;
-    //private OrderDAO ordDao;
+    private OrderDAO ordDao;
     private ComponentDAO compDao;
     
     public OrderHandler(){
         this.cliDao= new ClientDAO();
         this.compDao = new ComponentDAO();
+        this.ordDao = new OrderDAO();
     }
     public void addClient(String name,String morada,String mail,int telemovel,int nif) throws InvalidClientException{
         if(!this.cliDao.containsKey(name)){
@@ -75,6 +77,15 @@ public class OrderHandler {
          }
      }
      
+     public int putList (boolean sportSeats, String pack, boolean soundSystem, boolean centralConsole, boolean interiorLightsRGB, boolean passengersDVD, boolean smokedWindows, boolean exhaust, boolean spoiler, boolean starlight, boolean bycicleSupport, boolean externalNeonLeds ){
+         return ordDao.putList(sportSeats, pack, soundSystem, centralConsole, interiorLightsRGB, passengersDVD, smokedWindows, exhaust, spoiler, starlight, bycicleSupport, externalNeonLeds);
+     }
+     
+      public int getListId(){
+          return ordDao.getListId();
+      }
+     }
+     
   
     
-}
+
