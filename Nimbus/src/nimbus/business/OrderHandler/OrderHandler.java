@@ -84,6 +84,10 @@ public class OrderHandler {
       public int getListId(){
           return ordDao.getListId();
       }
+      
+       public int getOrderId(){
+           return ordDao.getOrderId();
+       }
      }
      
   

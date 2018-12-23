@@ -48,7 +48,29 @@ public class OrderDAO implements Map <String,Order> {
 
     @Override
     public Order put(String key, Order value) {
-        
+        try{
+            this.connection = Database.connect();
+            PreparedStatement state = connection.prepareStatement("INSERT INTO Encomenda (estado,Modelo_nome,Funcionario_nome,Cliente_nome,ListaComponentes_id_lista,Pacote_nome) VALUES(?,?,?,?,?,?)");
+            state.setString(1,value.getState());
+            state.setString(2,value.getModelName());
+            state.setString(3,value.getEmployeeUsername());
+            state.setString(4,value.getUsername());
+            state.setInt(5,value.getIdParts());
+            //state.setString(6,value.getPack());
+            state.executeUpdate();
+            
+        }
+        catch(SQLException e){
+            System.out.printf(e.getMessage());
+        }
+        finally{
+            try{
+                Database.close(connection);
+            }
+            catch(Exception e){
+                System.out.printf(e.getMessage());
+            }
+        }
         
     
         return null;
@@ -127,6 +149,31 @@ public class OrderDAO implements Map <String,Order> {
             ResultSet rs = state.executeQuery();
             if(rs.next()){
             r = rs.getInt("id_lista");
+            }
+            
+        }
+        catch(SQLException e){
+            System.out.printf(e.getMessage());
+        }
+        finally{
+            try{
+                Database.close(connection);
+            }
+            catch(Exception e){
+                System.out.printf(e.getMessage());
+            }
+    }
+            return r;
+    }
+    
+    public int getOrderId(){
+        int r=-1;
+            try{
+            this.connection = Database.connect();
+            PreparedStatement state = connection.prepareStatement("SELECT idEncomenda FROM Encomenda ORDER BY idEncomenda DESC LIMIT 0, 1;");
+            ResultSet rs = state.executeQuery();
+            if(rs.next()){
+            r = rs.getInt("idEncomenda");
             }
             
         }

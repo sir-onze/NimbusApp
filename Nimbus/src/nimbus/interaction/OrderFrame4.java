@@ -2,6 +2,7 @@ package nimbus.interaction;
 
 import nimbus.business.NimbusFacade;
 import nimbus.business.OrderHandler.Client;
+import nimbus.business.OrderHandler.Order;
 
 public class OrderFrame4 extends javax.swing.JFrame {
     
@@ -376,8 +377,18 @@ public class OrderFrame4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField19ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
         this.nimbus.putList(sportSeats,interiorPackage,soundSystem,centralConsole,interiorLightsRGB, passengersDVD,smokedWindows,exhaust,spoiler, starlight, bycicleSupport, externalNeonLeds);
-        System.out.println(this.nimbus.getListId());
+        int listId = this.nimbus.getListId();
+        int orderId = this.nimbus.getOrderId();
+       
+       // Order order = new Order(this.client,orderId,"Espera",this.model,this.paint,this.tires,this.wheels,this.engine,listId,);
+        // Client user,int oId, String state, String eU, String modelName, String paint, String tires, String wheels,
+                    //String engine,int idPartsList,String pack
+        
+        EmployeeFrame frame = new EmployeeFrame(this.nimbus);
+        frame.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

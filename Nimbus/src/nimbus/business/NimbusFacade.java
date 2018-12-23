@@ -72,5 +72,9 @@ public class NimbusFacade{
      public int getListId(){
          return ordH.getListId();
      }
+     
+      public int getOrderId(){
+          return ordH.getOrderId();
+      }
   
 }

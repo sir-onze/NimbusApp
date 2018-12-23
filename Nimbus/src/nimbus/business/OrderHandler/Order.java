@@ -14,12 +14,16 @@ public class Order {
     private String tires;
     private String wheels;
     private String engine;
-    private ArrayList<String> interiorDetails;
-    private ArrayList<String> exteriorDetails;
+    private String interiorPack;
+    private String exteriorPack;
+    
+    private int idPartsList;
+    //private ArrayList<String> interiorDetails;
+    //private ArrayList<String> exteriorDetails;
     
     public Order(Client user,int oId, String state, String eU, String modelName,
                     String paint, String tires, String wheels,
-                    String engine, ArrayList<String> intD, ArrayList<String> extD){
+                    String engine,int idPartsList,String pack,String packext,String exteriorPack /*,ArrayList<String> intD, ArrayList<String> extD*/){
         this.username =user;
         this.orderID = oId;
         this.state = state;
@@ -29,8 +33,11 @@ public class Order {
         this.tires = tires;
         this.wheels = wheels;
         this.engine = engine;
-        this.interiorDetails = intD;
-        this.exteriorDetails = extD;     
+        this.idPartsList = idPartsList;
+        this.interiorPack = pack;
+        this.exteriorPack = exteriorPack;
+        //this.interiorDetails = intD;
+        //this.exteriorDetails = extD;     
     }
     
     public int getOrderId(){ return this.orderID; }
@@ -41,8 +48,12 @@ public class Order {
     public String getTires(){ return this.tires; }
     public String getwheels(){ return this.wheels; }
     public String getEngine(){ return this.engine; }
-    public ArrayList<String> getInteriorDetails(){ return this.interiorDetails; }
-    public ArrayList<String> getExteriorDetails(){ return this.exteriorDetails; }
+    public String getUsername(){ return this.username.getNome();}
+    public int getIdParts(){ return this.idPartsList;}
+    public String getExteriorPack(){ return this.exteriorPack;}
+    public String getInteriorPack(){ return this.interiorPack;}
+    //public ArrayList<String> getInteriorDetails(){ return this.interiorDetails; }
+    //public ArrayList<String> getExteriorDetails(){ return this.exteriorDetails; }
     
     public void setOrderId(int oID){ this.orderID = oID ; }
     public void setState(String state){ this.state = state; }
