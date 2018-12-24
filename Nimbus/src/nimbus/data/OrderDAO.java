@@ -50,13 +50,12 @@ public class OrderDAO implements Map <String,Order> {
     public Order put(String key, Order value) {
         try{
             this.connection = Database.connect();
-            PreparedStatement state = connection.prepareStatement("INSERT INTO Encomenda (estado,Modelo_nome,Funcionario_nome,Cliente_nome,ListaComponentes_id_lista,Pacote_nome) VALUES(?,?,?,?,?,?)");
-            state.setString(1,value.getState());
+            PreparedStatement state = connection.prepareStatement("INSERT INTO Encomenda (estado,Modelo_nome,Funcionario_nome,Cliente_nome,ListaComponente_id_lista) VALUES(?,?,?,?,?)");
+            state.setInt(1,value.getState());
             state.setString(2,value.getModelName());
             state.setString(3,value.getEmployeeUsername());
             state.setString(4,value.getUsername());
             state.setInt(5,value.getIdParts());
-            //state.setString(6,value.getPack());
             state.executeUpdate();
             
         }
@@ -107,13 +106,13 @@ public class OrderDAO implements Map <String,Order> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-      public int putList (boolean sportSeats, String pack, boolean soundSystem, boolean centralConsole, boolean interiorLightsRGB, boolean passengersDVD, boolean smokedWindows, boolean exhaust, boolean spoiler, boolean starlight, boolean bycicleSupport, boolean externalNeonLeds ) {
+      public int putList (boolean sportSeats, String insidepack, boolean soundSystem, boolean centralConsole, boolean interiorLightsRGB, boolean passengersDVD, boolean smokedWindows, boolean exhaust, boolean spoiler, boolean starlight, boolean bycicleSupport, boolean externalNeonLeds,String PacoteExt_nome ) {
         int r=-1;
         try{
             this.connection = Database.connect();
-            PreparedStatement state = connection.prepareStatement("INSERT INTO ListaComponente (bancos,Pacote_nome,som,consola,luzes,leitor,vidros,escape,spoiler,teto,suporte,leds) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement state = connection.prepareStatement("INSERT INTO ListaComponente (bancos,Pacote_nome,som,consola,luzes,leitor,vidros,escape,spoiler,teto,suporte,leds,PacoteExt_nome) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
             state.setInt(1,boolToInt(sportSeats));
-            state.setString(2,pack);
+            state.setString(2,insidepack);
             state.setInt(3,boolToInt(soundSystem));
             state.setInt(4,boolToInt(centralConsole));
             state.setInt(5,boolToInt(interiorLightsRGB));
@@ -124,6 +123,7 @@ public class OrderDAO implements Map <String,Order> {
             state.setInt(10,boolToInt(starlight));
             state.setInt(11,boolToInt(bycicleSupport));
             state.setInt(12,boolToInt(externalNeonLeds));
+            state.setString(13,PacoteExt_nome);
             state.executeUpdate();
             
         }

@@ -65,16 +65,19 @@ public class NimbusFacade{
         ordH.removeComponent(nome);
     }
     
-    public int putList (boolean sportSeats, String pack, boolean soundSystem, boolean centralConsole, boolean interiorLightsRGB, boolean passengersDVD, boolean smokedWindows, boolean exhaust, boolean spoiler, boolean starlight, boolean bycicleSupport, boolean externalNeonLeds ){
-        return ordH.putList(sportSeats,pack,soundSystem,centralConsole,interiorLightsRGB, passengersDVD,smokedWindows,exhaust,spoiler, starlight, bycicleSupport, externalNeonLeds);
+    public int putList (boolean sportSeats, String pack, boolean soundSystem, boolean centralConsole, boolean interiorLightsRGB, boolean passengersDVD, boolean smokedWindows, boolean exhaust, boolean spoiler, boolean starlight, boolean bycicleSupport, boolean externalNeonLeds,String ext ){
+        return ordH.putList(sportSeats,pack,soundSystem,centralConsole,interiorLightsRGB, passengersDVD,smokedWindows,exhaust,spoiler, starlight, bycicleSupport, externalNeonLeds, ext);
     }
     
-     public int getListId(){
+    public int getListId(){
          return ordH.getListId();
      }
      
-      public int getOrderId(){
+    public int getOrderId(){
           return ordH.getOrderId();
       }
-  
+    
+    public void addOrder(String key,Order order){
+        ordH.addOrder(key,order);
+    }
 }

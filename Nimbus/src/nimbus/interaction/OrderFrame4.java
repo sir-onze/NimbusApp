@@ -378,13 +378,11 @@ public class OrderFrame4 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-        this.nimbus.putList(sportSeats,interiorPackage,soundSystem,centralConsole,interiorLightsRGB, passengersDVD,smokedWindows,exhaust,spoiler, starlight, bycicleSupport, externalNeonLeds);
+        this.nimbus.putList(sportSeats,interiorPackage,soundSystem,centralConsole,interiorLightsRGB, passengersDVD,smokedWindows,exhaust,spoiler, starlight, bycicleSupport, externalNeonLeds,exteriorPackage);
         int listId = this.nimbus.getListId();
         int orderId = this.nimbus.getOrderId();
-       
-       // Order order = new Order(this.client,orderId,"Espera",this.model,this.paint,this.tires,this.wheels,this.engine,listId,);
-        // Client user,int oId, String state, String eU, String modelName, String paint, String tires, String wheels,
-                    //String engine,int idPartsList,String pack
+        Order order = new Order(this.client,orderId,1,this.nimbus.getEmployee().getUsername(),this.model,this.paint,this.tires,this.wheels,this.engine,listId);
+        this.nimbus.addOrder(null, order);
         
         EmployeeFrame frame = new EmployeeFrame(this.nimbus);
         frame.setVisible(true);

@@ -77,8 +77,8 @@ public class OrderHandler {
          }
      }
      
-     public int putList (boolean sportSeats, String pack, boolean soundSystem, boolean centralConsole, boolean interiorLightsRGB, boolean passengersDVD, boolean smokedWindows, boolean exhaust, boolean spoiler, boolean starlight, boolean bycicleSupport, boolean externalNeonLeds ){
-         return ordDao.putList(sportSeats, pack, soundSystem, centralConsole, interiorLightsRGB, passengersDVD, smokedWindows, exhaust, spoiler, starlight, bycicleSupport, externalNeonLeds);
+     public int putList (boolean sportSeats, String pack, boolean soundSystem, boolean centralConsole, boolean interiorLightsRGB, boolean passengersDVD, boolean smokedWindows, boolean exhaust, boolean spoiler, boolean starlight, boolean bycicleSupport, boolean externalNeonLeds,String ext ){
+         return ordDao.putList(sportSeats, pack, soundSystem, centralConsole, interiorLightsRGB, passengersDVD, smokedWindows, exhaust, spoiler, starlight, bycicleSupport, externalNeonLeds,ext);
      }
      
       public int getListId(){
@@ -87,6 +87,10 @@ public class OrderHandler {
       
        public int getOrderId(){
            return ordDao.getOrderId();
+       }
+       
+       public void addOrder(String key,Order value){
+           ordDao.put(key, value);
        }
      }
      
