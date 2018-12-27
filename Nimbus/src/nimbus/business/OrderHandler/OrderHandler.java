@@ -107,7 +107,7 @@ public class OrderHandler {
        public ArrayList<Order> getAllOrders(){
            return ordDao.getAllOrders();
        }
-        public HashMap<Integer,ArrayList<String>> getOrdersWaiting(HashMap<Integer,ArrayList<String>> orders){
+        public HashMap<Integer,ArrayList<String>> getOrdersWaiting(HashMap<Integer,ArrayList<String>> orders) throws NoOrdersWaitingException{
             return ordDao.getOrdersWaiting(orders);
         }
      }

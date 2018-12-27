@@ -5,6 +5,7 @@ import java.util.Map;
 import nimbus.business.*;
 import nimbus.business.OrderHandler.Component;
 import nimbus.business.OrderHandler.InvalidComponentException;
+import nimbus.business.OrderHandler.NoOrdersWaitingException;
 import nimbus.business.OrderHandler.Order;
 
 public class FactoryFrame extends javax.swing.JFrame {
@@ -360,8 +361,14 @@ public class FactoryFrame extends javax.swing.JFrame {
          /* segunda parte onde se irá verificar se a peça adicionado coloca alguma encomenda em estado de ser produzida*/
          //construção do hashmap this.nimbus.getOrdersParts();
          ArrayList <Order> allOrders = this.nimbus.getAllOrders();
-         HashMap <Integer,ArrayList<String>> ordersParts =this.nimbus.getOrdersParts(allOrders);
-         this.parts = this.nimbus.getOrdersWaiting(ordersParts);
+         HashMap <Integer,ArrayList<String>> ordersParts = new HashMap <Integer,ArrayList<String>>();
+         ordersParts = this.nimbus.getOrdersParts(allOrders);
+         System.out.println(ordersParts.get(1).get(0));
+         /*
+         try{
+             this.parts = this.nimbus.getOrdersWaiting(ordersParts);
+        
+         
          
          //verificação
          int id=0;
@@ -372,6 +379,7 @@ public class FactoryFrame extends javax.swing.JFrame {
              temp=part.getValue();
              break;
          }
+         System.out.println(id);
          if(id!=0){
              temp.remove(nome);
              parts.put(id, temp);
@@ -380,8 +388,14 @@ public class FactoryFrame extends javax.swing.JFrame {
          if(temp.isEmpty()){
               jLabel6.setText("Encomenda" +id +"pronta a ser produzida");
          }
+          }
+            }
+         catch(NoOrdersWaitingException e){
+               jLabel6.setText("Não existem encomendas que necessitem desta peça"
+                      );
+                 }*/
         
-         }
+      
          
             }
             catch(InvalidComponentException e){

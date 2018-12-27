@@ -93,7 +93,7 @@ public class NimbusFacade{
     public HashMap<Integer,ArrayList<String>> getOrdersParts(ArrayList<Order> orders){
         return ordH.getOrdersParts(orders);
     }
-    public HashMap<Integer,ArrayList<String>> getOrdersWaiting(HashMap<Integer,ArrayList<String>> orders){
+    public HashMap<Integer,ArrayList<String>> getOrdersWaiting(HashMap<Integer,ArrayList<String>> orders) throws NoOrdersWaitingException{
             return ordH.getOrdersWaiting(orders);
         }
 }
