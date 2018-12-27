@@ -191,7 +191,7 @@ public class OrderFrame3 extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox5.setText("Luzes interios RGB");
+        jCheckBox5.setText("Luzes interior RGB");
         jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox5ActionPerformed(evt);

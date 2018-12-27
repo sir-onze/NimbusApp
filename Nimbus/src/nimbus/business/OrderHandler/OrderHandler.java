@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package nimbus.business.OrderHandler;
+import java.util.ArrayList;
+import java.util.HashMap;
+import nimbus.business.EmployeeHandler.Employee;
 import nimbus.data.ClientDAO;
 import nimbus.data.ComponentDAO;
 import nimbus.data.OrderDAO;
@@ -91,6 +94,14 @@ public class OrderHandler {
        
        public void addOrder(String key,Order value){
            ordDao.put(key, value);
+       }
+       
+       public ArrayList <Order> getOrders(Employee e){
+            return ordDao.getOrders(e);
+       }
+       
+       public HashMap <Integer,ArrayList<String>> getOrdersParts(){
+           return null;//ordDao.getOrdersParts();
        }
      }
      

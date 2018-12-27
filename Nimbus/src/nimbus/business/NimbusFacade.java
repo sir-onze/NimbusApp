@@ -1,5 +1,7 @@
 package nimbus.business;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import nimbus.business.OrderHandler.InvalidClientException;
 import nimbus.business.OrderHandler.*;
 import nimbus.business.EmployeeHandler.*;
@@ -79,5 +81,12 @@ public class NimbusFacade{
     
     public void addOrder(String key,Order order){
         ordH.addOrder(key,order);
+    }
+    
+    public ArrayList <Order> getOrders(Employee e){
+        return ordH.getOrders(e);
+    }
+    public HashMap <Integer,ArrayList<String>> getOrdersParts(){
+        return ordH.getOrdersParts();
     }
 }

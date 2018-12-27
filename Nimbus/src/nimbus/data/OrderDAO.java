@@ -8,9 +8,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import nimbus.business.EmployeeHandler.Employee;
+import nimbus.business.OrderHandler.Client;
 import nimbus.business.OrderHandler.Order;
 
 /**
@@ -194,6 +198,98 @@ public class OrderDAO implements Map <String,Order> {
        public int boolToInt(boolean b){
          return b ? 1 : 0;
      }
-  
+       // Client user,int oId, int state, String eU, String modelName,
+                    //String paint, String tires, String wheels,
+                    //String engine,int idPartsList /*,ArrayList<String> intD, ArrayList<String> extD*/
+       public ArrayList<Order> getOrders(Employee emp){
+           ArrayList <Order> r = new ArrayList();
+           try{
+            this.connection = Database.connect();
+            PreparedStatement state = connection.prepareStatement("SELECT * FROM Encomenda WHERE Funcionario_nome = ?");
+            state.setString(1,emp.getUsername());
+            ResultSet rs = state.executeQuery();
+            while(rs.next()){
+                r.add(new Order (new Client(rs.getString("Cliente_nome"),null,null,0,0),rs.getInt("idEncomenda"),rs.getInt("estado"),rs.getString("Funcionario_nome"),rs.getString("Modelo_nome"),null,null,null,null,rs.getInt("ListaComponente_id_lista")));
+            }
+            System.out.println(r.get(0).getEmployeeUsername());
+        }
+        catch(SQLException e){
+            System.out.printf(e.getMessage());
+        }
+        finally{
+            try{
+                Database.close(connection);
+            }
+            catch(Exception e){
+                System.out.printf(e.getMessage());
+            }
+       }
+            return r; 
+       }
+       
+       public ArrayList<Order> getAllOrders(){
+           ArrayList<Order> r = new ArrayList<>();
+           try{
+            this.connection = Database.connect();
+            PreparedStatement state = connection.prepareStatement("SELECT * FROM Encomenda WHERE estado=1");
+            ResultSet rs = state.executeQuery();
+            while(rs.next()){
+                r.add(new Order (new Client(rs.getString("Cliente_nome"),null,null,0,0),rs.getInt("idEncomenda"),rs.getInt("estado"),rs.getString("Funcionario_nome"),rs.getString("Modelo_nome"),null,null,null,null,rs.getInt("ListaComponente_id_lista")));
+            }
+            
+        }
+        catch(SQLException e){
+            System.out.printf(e.getMessage());
+        }
+        finally{
+            try{
+                Database.close(connection);
+            }
+            catch(Exception e){
+                System.out.printf(e.getMessage());
+            }
+       }
+           return r;
+       }
+       
+       public ArrayList<String> getOrdersParts(ArrayList<Order> orders){
+           ArrayList <String> list= null;     
+           try{
+            this.connection = Database.connect();
+            for(Order temp : orders){
+            PreparedStatement state = connection.prepareStatement("SELECT * FROM Encomenda WHERE id_lista = ?");
+            state.setInt(1,temp.getIdParts());
+            ResultSet rs = state.executeQuery();
+            list = new ArrayList<>();
+            while(rs.next()){
+              if(rs.getInt("bancos")==1) list.add("Bancos Desportivos");
+              if(rs.getInt("som")==1) list.add("Sistema de Som Pioneer");
+              if(rs.getInt("consola")==1) list.add("Consola central c/ Ecrã LCD + GPS");
+              if(rs.getInt("luzes")==1)list.add("Luzes interior RGB");
+              if(rs.getInt("leitor")==1)list.add("Leitor DVD p/ passageiros");
+              if(rs.getInt("vidros")==1)list.add("Vidros fumados");
+              if(rs.getInt("escape")==1)list.add("Escape CorsairGT");
+              if(rs.getInt("spoiler")==1)list.add("Spoiler Sparco");
+              if(rs.getInt("teto")==1)list.add("Teto de abrir");
+              if(rs.getInt("suporte")==1)list.add("Suporte de bicicletas");
+              if(rs.getInt("leds")==1);list.add("Led's Neon Externos"); 
+                   }
+            }
+            
+            
+        }
+        catch(SQLException e){
+            System.out.printf(e.getMessage());
+        }
+        finally{
+            try{
+                Database.close(connection);
+            }
+            catch(Exception e){
+                System.out.printf(e.getMessage());
+            }
+       }
+                return list;
+       }
     //INSERT INTO ListaComponente (bancos,Pacote_nome,som,consola,luzes,leitor,vidros,escape,spoiler,teto,suporte,leds) VALUES (0,'nice',1,0,1,1,0,1,0,1,0,1);
 }
