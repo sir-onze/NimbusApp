@@ -347,14 +347,12 @@ public class FactoryFrame extends javax.swing.JFrame {
         jLabel6.setText("");
         String nome = jTextField2.getText();
         String aux_stock = jTextField3.getText();
-        
+        int id=0;
          if(!nome.equals("") && !aux_stock.equals("")){
              try{
            int stock = Integer.parseInt(aux_stock);
-           this.nimbus.updateStock(nome, stock);
            jTextField3.setText("");
            jTextField3.setText(String.valueOf(stock));
-           jLabel6.setText("Stock adicionado");
            jTextField2.setText("");
            jTextField3.setText("");
            jTextField5.setText("");
@@ -363,37 +361,32 @@ public class FactoryFrame extends javax.swing.JFrame {
          ArrayList <Order> allOrders = this.nimbus.getAllOrders();
          HashMap <Integer,ArrayList<String>> ordersParts = new HashMap <Integer,ArrayList<String>>();
          ordersParts = this.nimbus.getOrdersParts(allOrders);
-         System.out.println(ordersParts.get(1).get(0));
-         /*
          try{
              this.parts = this.nimbus.getOrdersWaiting(ordersParts);
         
          
          
          //verificação
-         int id=0;
-         ArrayList<String> temp= null;
-         for (Map.Entry<Integer, ArrayList<String>> part : parts.entrySet()) {
-         if (part.getValue().contains(nome)){
-             id=part.getKey();
-             temp=part.getValue();
-             break;
-         }
-         System.out.println(id);
-         if(id!=0){
-             temp.remove(nome);
-             parts.put(id, temp);
-         }
-         
-         if(temp.isEmpty()){
-              jLabel6.setText("Encomenda" +id +"pronta a ser produzida");
-         }
-          }
+        for(Map.Entry<Integer, ArrayList<String>> entry : this.parts.entrySet()){
+            System.out.println("frame"+entry.getValue().get(0)+entry.getValue().size()+nome);
+            if(entry.getValue().contains(nome) && entry.getValue().size()==1){
+            id=entry.getKey();
+            System.out.println(id);
+            break;
+            }
+        }
+        this.nimbus.updateStock(nome, stock);
+        jLabel6.setText("Stock adicionado");
+        if(id!=0){
+            jLabel6.setText("Encomenda "+id+" produzida"
+                      );
+        }
+
             }
          catch(NoOrdersWaitingException e){
                jLabel6.setText("Não existem encomendas que necessitem desta peça"
                       );
-                 }*/
+                 }
         
       
          

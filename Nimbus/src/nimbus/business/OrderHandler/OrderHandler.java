@@ -101,7 +101,7 @@ public class OrderHandler {
        }
        
        public HashMap<Integer,ArrayList<String>> getOrdersParts(ArrayList<Order> orders){
-           return null;//ordDao.getOrdersParts();
+           return ordDao.getOrdersParts(orders);
        }
        
        public ArrayList<Order> getAllOrders(){

@@ -257,9 +257,8 @@ public class OrderDAO implements Map <String,Order> {
            HashMap retur = new HashMap <Integer,ArrayList<String>>();
            try{
             this.connection = Database.connect();
-            
+            PreparedStatement state = connection.prepareStatement("SELECT * FROM ListaComponente WHERE id_lista = ?");            
             for(Order temp : orders){   
-                PreparedStatement state = connection.prepareStatement("SELECT * FROM ListaComponente WHERE id_lista = ?");
                 state.setInt(1,temp.getIdParts());
                 ResultSet rs = state.executeQuery();
                 list = new ArrayList<>();
@@ -276,10 +275,9 @@ public class OrderDAO implements Map <String,Order> {
                     if(rs.getInt("suporte")==1)list.add("Suporte de bicicletas");
                     if(rs.getInt("leds")==1);list.add("Led's Neon Externos");
                     retur.put(temp.getOrderId(),list);
-                   }
-            
+                }
+                System.out.println(list.get(1));
             }
-            
             
         }
         catch(SQLException e){
@@ -297,41 +295,28 @@ public class OrderDAO implements Map <String,Order> {
        }
        public HashMap<Integer,ArrayList<String>> getOrdersWaiting(HashMap<Integer,ArrayList<String>> orders){
            ArrayList <String> list= null;
+           ArrayList<String> aux = new ArrayList<String>();
            HashMap retur = new HashMap <Integer,ArrayList<String>>();
            try{
             this.connection = Database.connect();
-            
+            PreparedStatement state = connection.prepareStatement("SELECT * FROM Componente WHERE nome = ?");
             for(Map.Entry<Integer, ArrayList<String>> entry : orders.entrySet()){
+                System.out.println("for da hash");
                 for(String part : entry.getValue()){
-                    PreparedStatement state = connection.prepareStatement("SELECT * FROM Componente WHERE nome = ?");
+                    System.out.println("for do arrays");
                     state.setString(1,part);
                     ResultSet rs = state.executeQuery();
                     if(rs.next()){
-                        if(rs.getInt("stock")>0) {
-                            entry.getValue().remove(part);
-                            retur.put(entry.getKey(),entry.getValue());
+                        if((rs.getInt("stock"))==0) {
+                            aux.add(rs.getString("nome"));
+                            System.out.println("dentro"+rs.getString("nome") +rs.getInt("stock"));
+                            //entry.getValue().remove(part);
+                            //retur.put(entry.getKey(),entry.getValue());
                         }
                     }
                 }
-                /*
-                state.setString(1,temp.getIdParts());
-                ResultSet rs = state.executeQuery();
-                list = new ArrayList<>();
-                while(rs.next()){
-                    if(rs.getInt("bancos")==1) list.add("Bancos Desportivos");
-                    if(rs.getInt("som")==1) list.add("Sistema de Som Pioneer");
-                    if(rs.getInt("consola")==1) list.add("Consola central c/ Ecrã LCD + GPS");
-                    if(rs.getInt("luzes")==1)list.add("Luzes interior RGB");
-                    if(rs.getInt("leitor")==1)list.add("Leitor DVD p/ passageiros");
-                    if(rs.getInt("vidros")==1)list.add("Vidros fumados");
-                    if(rs.getInt("escape")==1)list.add("Escape CorsairGT");
-                    if(rs.getInt("spoiler")==1)list.add("Spoiler Sparco");
-                    if(rs.getInt("teto")==1)list.add("Teto de abrir");
-                    if(rs.getInt("suporte")==1)list.add("Suporte de bicicletas");
-                    if(rs.getInt("leds")==1);list.add("Led's Neon Externos");
-                    retur.put(temp.getOrderId(),list);
-                   }*/
-            
+                retur.put(entry.getKey(),aux);
+                aux=new ArrayList<>();
             }
             
             

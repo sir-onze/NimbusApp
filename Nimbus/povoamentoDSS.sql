@@ -37,3 +37,5 @@ SELECT * FROM PacoteInt ;
 SELECT preco FROM Modelo ORDER BY preco DESC LIMIT 0, 1;
 
 SELECT nome FROM PacoteExt WHERE preco <69 OR preco = 42 AND preco=12;
+
+SELECT * FROM Componente ;
