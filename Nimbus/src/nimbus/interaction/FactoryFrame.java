@@ -5,6 +5,7 @@ import java.util.Map;
 import nimbus.business.*;
 import nimbus.business.OrderHandler.Component;
 import nimbus.business.OrderHandler.InvalidComponentException;
+import nimbus.business.OrderHandler.Order;
 
 public class FactoryFrame extends javax.swing.JFrame {
     /* Variaveis de intância da classe, incluem a facade da aplicação e 
@@ -358,6 +359,9 @@ public class FactoryFrame extends javax.swing.JFrame {
            jTextField5.setText("");
          /* segunda parte onde se irá verificar se a peça adicionado coloca alguma encomenda em estado de ser produzida*/
          //construção do hashmap this.nimbus.getOrdersParts();
+         ArrayList <Order> allOrders = this.nimbus.getAllOrders();
+         HashMap <Integer,ArrayList<String>> ordersParts =this.nimbus.getOrdersParts(allOrders);
+         this.parts = this.nimbus.getOrdersWaiting(ordersParts);
          
          //verificação
          int id=0;

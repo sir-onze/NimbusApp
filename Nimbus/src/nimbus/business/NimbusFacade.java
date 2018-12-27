@@ -86,7 +86,14 @@ public class NimbusFacade{
     public ArrayList <Order> getOrders(Employee e){
         return ordH.getOrders(e);
     }
-    public HashMap <Integer,ArrayList<String>> getOrdersParts(){
-        return ordH.getOrdersParts();
+    public ArrayList<Order> getAllOrders(){
+           return ordH.getAllOrders();
+       }
+    
+    public HashMap<Integer,ArrayList<String>> getOrdersParts(ArrayList<Order> orders){
+        return ordH.getOrdersParts(orders);
     }
+    public HashMap<Integer,ArrayList<String>> getOrdersWaiting(HashMap<Integer,ArrayList<String>> orders){
+            return ordH.getOrdersWaiting(orders);
+        }
 }

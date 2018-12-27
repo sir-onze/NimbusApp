@@ -100,9 +100,16 @@ public class OrderHandler {
             return ordDao.getOrders(e);
        }
        
-       public HashMap <Integer,ArrayList<String>> getOrdersParts(){
+       public HashMap<Integer,ArrayList<String>> getOrdersParts(ArrayList<Order> orders){
            return null;//ordDao.getOrdersParts();
        }
+       
+       public ArrayList<Order> getAllOrders(){
+           return ordDao.getAllOrders();
+       }
+        public HashMap<Integer,ArrayList<String>> getOrdersWaiting(HashMap<Integer,ArrayList<String>> orders){
+            return ordDao.getOrdersWaiting(orders);
+        }
      }
      
   

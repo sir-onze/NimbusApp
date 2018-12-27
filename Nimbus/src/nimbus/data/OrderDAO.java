@@ -252,28 +252,32 @@ public class OrderDAO implements Map <String,Order> {
            return r;
        }
        
-       public ArrayList<String> getOrdersParts(ArrayList<Order> orders){
-           ArrayList <String> list= null;     
+       public HashMap<Integer,ArrayList<String>> getOrdersParts(ArrayList<Order> orders){
+           ArrayList <String> list= null;
+           HashMap retur = new HashMap <Integer,ArrayList<String>>();
            try{
             this.connection = Database.connect();
-            for(Order temp : orders){
-            PreparedStatement state = connection.prepareStatement("SELECT * FROM Encomenda WHERE id_lista = ?");
-            state.setInt(1,temp.getIdParts());
-            ResultSet rs = state.executeQuery();
-            list = new ArrayList<>();
-            while(rs.next()){
-              if(rs.getInt("bancos")==1) list.add("Bancos Desportivos");
-              if(rs.getInt("som")==1) list.add("Sistema de Som Pioneer");
-              if(rs.getInt("consola")==1) list.add("Consola central c/ Ecrã LCD + GPS");
-              if(rs.getInt("luzes")==1)list.add("Luzes interior RGB");
-              if(rs.getInt("leitor")==1)list.add("Leitor DVD p/ passageiros");
-              if(rs.getInt("vidros")==1)list.add("Vidros fumados");
-              if(rs.getInt("escape")==1)list.add("Escape CorsairGT");
-              if(rs.getInt("spoiler")==1)list.add("Spoiler Sparco");
-              if(rs.getInt("teto")==1)list.add("Teto de abrir");
-              if(rs.getInt("suporte")==1)list.add("Suporte de bicicletas");
-              if(rs.getInt("leds")==1);list.add("Led's Neon Externos"); 
+            
+            for(Order temp : orders){   
+                PreparedStatement state = connection.prepareStatement("SELECT * FROM ListaComponente WHERE id_lista = ?");
+                state.setInt(1,temp.getIdParts());
+                ResultSet rs = state.executeQuery();
+                list = new ArrayList<>();
+                while(rs.next()){
+                    if(rs.getInt("bancos")==1) list.add("Bancos Desportivos");
+                    if(rs.getInt("som")==1) list.add("Sistema de Som Pioneer");
+                    if(rs.getInt("consola")==1) list.add("Consola central c/ Ecrã LCD + GPS");
+                    if(rs.getInt("luzes")==1)list.add("Luzes interior RGB");
+                    if(rs.getInt("leitor")==1)list.add("Leitor DVD p/ passageiros");
+                    if(rs.getInt("vidros")==1)list.add("Vidros fumados");
+                    if(rs.getInt("escape")==1)list.add("Escape CorsairGT");
+                    if(rs.getInt("spoiler")==1)list.add("Spoiler Sparco");
+                    if(rs.getInt("teto")==1)list.add("Teto de abrir");
+                    if(rs.getInt("suporte")==1)list.add("Suporte de bicicletas");
+                    if(rs.getInt("leds")==1);list.add("Led's Neon Externos");
+                    retur.put(temp.getOrderId(),list);
                    }
+            
             }
             
             
@@ -289,7 +293,61 @@ public class OrderDAO implements Map <String,Order> {
                 System.out.printf(e.getMessage());
             }
        }
-                return list;
+              return retur ;
+       }
+       public HashMap<Integer,ArrayList<String>> getOrdersWaiting(HashMap<Integer,ArrayList<String>> orders){
+           ArrayList <String> list= null;
+           HashMap retur = new HashMap <Integer,ArrayList<String>>();
+           try{
+            this.connection = Database.connect();
+            
+            for(Map.Entry<Integer, ArrayList<String>> entry : orders.entrySet()){
+                for(String part : entry.getValue()){
+                    PreparedStatement state = connection.prepareStatement("SELECT * FROM Componente WHERE nome = ?");
+                    state.setString(1,part);
+                    ResultSet rs = state.executeQuery();
+                    if(rs.next()){
+                        if(rs.getInt("stock")>0) {
+                            entry.getValue().remove(part);
+                            retur.put(entry.getKey(),entry.getValue());
+                        }
+                    }
+                }
+                /*
+                state.setString(1,temp.getIdParts());
+                ResultSet rs = state.executeQuery();
+                list = new ArrayList<>();
+                while(rs.next()){
+                    if(rs.getInt("bancos")==1) list.add("Bancos Desportivos");
+                    if(rs.getInt("som")==1) list.add("Sistema de Som Pioneer");
+                    if(rs.getInt("consola")==1) list.add("Consola central c/ Ecrã LCD + GPS");
+                    if(rs.getInt("luzes")==1)list.add("Luzes interior RGB");
+                    if(rs.getInt("leitor")==1)list.add("Leitor DVD p/ passageiros");
+                    if(rs.getInt("vidros")==1)list.add("Vidros fumados");
+                    if(rs.getInt("escape")==1)list.add("Escape CorsairGT");
+                    if(rs.getInt("spoiler")==1)list.add("Spoiler Sparco");
+                    if(rs.getInt("teto")==1)list.add("Teto de abrir");
+                    if(rs.getInt("suporte")==1)list.add("Suporte de bicicletas");
+                    if(rs.getInt("leds")==1);list.add("Led's Neon Externos");
+                    retur.put(temp.getOrderId(),list);
+                   }*/
+            
+            }
+            
+            
+        }
+        catch(SQLException e){
+            System.out.printf(e.getMessage());
+        }
+        finally{
+            try{
+                Database.close(connection);
+            }
+            catch(Exception e){
+                System.out.printf(e.getMessage());
+            }
+       }
+           return retur;
        }
     //INSERT INTO ListaComponente (bancos,Pacote_nome,som,consola,luzes,leitor,vidros,escape,spoiler,teto,suporte,leds) VALUES (0,'nice',1,0,1,1,0,1,0,1,0,1);
 }
