@@ -63,8 +63,8 @@ public class NimbusFacade{
     public void updateStock(String nome,int stock) throws InvalidComponentException{
         ordH.updateStock(nome,stock);
     }
-    public void removeComponent(String nome)throws InvalidComponentException{
-        ordH.removeComponent(nome);
+    public void removeComponent(String nome,int stock)throws InvalidComponentException{
+        ordH.removeComponent(nome,stock);
     }
     
     public int putList (boolean sportSeats, String pack, boolean soundSystem, boolean centralConsole, boolean interiorLightsRGB, boolean passengersDVD, boolean smokedWindows, boolean exhaust, boolean spoiler, boolean starlight, boolean bycicleSupport, boolean externalNeonLeds,String ext ){
@@ -96,4 +96,7 @@ public class NimbusFacade{
     public HashMap<Integer,ArrayList<String>> getOrdersWaiting(HashMap<Integer,ArrayList<String>> orders) throws NoOrdersWaitingException{
             return ordH.getOrdersWaiting(orders);
         }
+    public void setProducted(int id) throws InvalidOrderIdException{
+        ordH.setProducted(id);
+    }
 }

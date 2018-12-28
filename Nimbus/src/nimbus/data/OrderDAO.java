@@ -54,12 +54,16 @@ public class OrderDAO implements Map <String,Order> {
     public Order put(String key, Order value) {
         try{
             this.connection = Database.connect();
-            PreparedStatement state = connection.prepareStatement("INSERT INTO Encomenda (estado,Modelo_nome,Funcionario_nome,Cliente_nome,ListaComponente_id_lista) VALUES(?,?,?,?,?)");
+            PreparedStatement state = connection.prepareStatement("INSERT INTO Encomenda (estado,Modelo_nome,Funcionario_nome,Cliente_nome,ListaComponente_id_lista,pintura,pneus,jantes,motor) VALUES(?,?,?,?,?,?,?,?,?)");
             state.setInt(1,value.getState());
             state.setString(2,value.getModelName());
             state.setString(3,value.getEmployeeUsername());
             state.setString(4,value.getUsername());
             state.setInt(5,value.getIdParts());
+            state.setString(6,value.getPait());
+            state.setString(7,value.getTires());
+            state.setString(8,value.getwheels());
+            state.setString(9,value.getEngine());
             state.executeUpdate();
             
         }
@@ -231,7 +235,7 @@ public class OrderDAO implements Map <String,Order> {
            ArrayList<Order> r = new ArrayList<>();
            try{
             this.connection = Database.connect();
-            PreparedStatement state = connection.prepareStatement("SELECT * FROM Encomenda WHERE estado=1");
+            PreparedStatement state = connection.prepareStatement("SELECT * FROM Encomenda");
             ResultSet rs = state.executeQuery();
             while(rs.next()){
                 r.add(new Order (new Client(rs.getString("Cliente_nome"),null,null,0,0),rs.getInt("idEncomenda"),rs.getInt("estado"),rs.getString("Funcionario_nome"),rs.getString("Modelo_nome"),null,null,null,null,rs.getInt("ListaComponente_id_lista")));
@@ -334,5 +338,25 @@ public class OrderDAO implements Map <String,Order> {
        }
            return retur;
        }
-    //INSERT INTO ListaComponente (bancos,Pacote_nome,som,consola,luzes,leitor,vidros,escape,spoiler,teto,suporte,leds) VALUES (0,'nice',1,0,1,1,0,1,0,1,0,1);
+       
+       public void setProducted(int id){
+           try{
+            this.connection = Database.connect();
+            PreparedStatement state = connection.prepareStatement("UPDATE Encomenda SET estado=2 WHERE idEncomenda=?");
+            state.setInt(1,id);
+            state.executeUpdate();
+            
+        }
+        catch(SQLException e){
+            System.out.printf(e.getMessage());
+        }
+        finally{
+            try{
+                Database.close(connection);
+            }
+            catch(Exception e){
+                System.out.printf(e.getMessage());
+            }
+        }
+       }
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 import nimbus.business.*;
 import nimbus.business.OrderHandler.Component;
 import nimbus.business.OrderHandler.InvalidComponentException;
+import nimbus.business.OrderHandler.InvalidOrderIdException;
 import nimbus.business.OrderHandler.NoOrdersWaitingException;
 import nimbus.business.OrderHandler.Order;
 
@@ -49,7 +50,6 @@ public class FactoryFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -65,8 +65,18 @@ public class FactoryFrame extends javax.swing.JFrame {
 
         jButton6.setText("Produzir Encomenda");
         jButton6.setActionCommand("");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Consultar Encomendas");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/box.png"))); // NOI18N
 
@@ -113,7 +123,7 @@ public class FactoryFrame extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(150, 113, 4));
 
         jButton3.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
-        jButton3.setText("Remover Componente");
+        jButton3.setText("Remover do Stock");
         jButton3.setActionCommand("Adicionar ao stock");
         jButton3.setPreferredSize(new java.awt.Dimension(143, 31));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -152,14 +162,6 @@ public class FactoryFrame extends javax.swing.JFrame {
 
         jLabel8.setText("Preço");
 
-        jButton8.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
-        jButton8.setText("Adicionar novo componente");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -187,19 +189,18 @@ public class FactoryFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(6, 6, 6)))
                 .addGap(28, 28, 28))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,13 +226,11 @@ public class FactoryFrame extends javax.swing.JFrame {
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addGap(12, 12, 12)
-                .addComponent(jButton8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel6.setBackground(new java.awt.Color(145, 0, 0));
@@ -326,14 +325,16 @@ public class FactoryFrame extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
       jLabel6.setText("");
       String nome = jTextField2.getText();
-      if(nome.equals("")) jLabel6.setText("Preencha os campos obrigatórios");
+      String stock_aux = jTextField3.getText();
+      if(nome.equals("") || stock_aux.equals("")) jLabel6.setText("Preencha os campos obrigatórios");
        else{
             try{
-            this.nimbus.removeComponent(nome);
+            int stock = Integer.parseInt(stock_aux);
+            this.nimbus.removeComponent(nome,stock);
             jTextField2.setText("");
             jTextField3.setText("");
             jTextField5.setText("");
-            jLabel6.setText("Componente removido");
+            jLabel6.setText("Stock removido");
             }
             catch(InvalidComponentException e){
                     jLabel6.setText("Componente inexistente");
@@ -363,9 +364,6 @@ public class FactoryFrame extends javax.swing.JFrame {
          ordersParts = this.nimbus.getOrdersParts(allOrders);
          try{
              this.parts = this.nimbus.getOrdersWaiting(ordersParts);
-        
-         
-         
          //verificação
         for(Map.Entry<Integer, ArrayList<String>> entry : this.parts.entrySet()){
             System.out.println("frame"+entry.getValue().get(0)+entry.getValue().size()+nome);
@@ -387,9 +385,6 @@ public class FactoryFrame extends javax.swing.JFrame {
                jLabel6.setText("Não existem encomendas que necessitem desta peça"
                       );
                  }
-        
-      
-         
             }
             catch(InvalidComponentException e){
                     jLabel6.setText("Componente inexistente");
@@ -425,27 +420,28 @@ public class FactoryFrame extends javax.swing.JFrame {
       
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-     jLabel6.setText("");
-     String nome = jTextField2.getText();
-     String aux_quantidade = jTextField3.getText();
-     String aux_preco =jTextField5.getText();
-     if(nome.equals("") || aux_quantidade.equals("") || aux_preco.equals("")) jLabel6.setText("Preencha os campos obrigatórios");
-     else{
-         try{
-             int quantidade = Integer.parseInt(aux_quantidade);
-             float preco = Float.parseFloat(aux_preco);
-             this.nimbus.addComponent(nome,quantidade,preco);
-             jLabel6.setText("Componente adicionado");
-             jTextField2.setText("");
-             jTextField3.setText("");
-             jTextField5.setText("");
-         }
-         catch(InvalidComponentException e){
-             jLabel6.setText("Componente inexistente");
-         }
-     }
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        OrderFrameConsultFactory consult = new OrderFrameConsultFactory(nimbus);
+        consult.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        String id_aux = jTextField4.getText();
+        if(!id_aux.equals("")){
+            
+        try{
+        int id = Integer.parseInt(id_aux);
+        this.nimbus.setProducted(id);
+        jLabel6.setText("Encomenda produzida");
+    }
+        catch(InvalidOrderIdException e){
+            jLabel6.setText("Encomenda Inexistente");
+        }
+  
+        }
+        else jLabel6.setText("Preencha campos obrigatórios");
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -454,7 +450,6 @@ public class FactoryFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

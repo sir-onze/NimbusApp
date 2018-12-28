@@ -74,9 +74,9 @@ public class OrderHandler {
          }
      }
      
-     public void removeComponent(String nome)throws InvalidComponentException{
+     public void removeComponent(String nome,int stock)throws InvalidComponentException{
           if(compDao.containsKey(nome)){
-            compDao.remove(nome);
+            compDao.removeStock(nome,stock);
          }
      }
      
@@ -109,6 +109,9 @@ public class OrderHandler {
        }
         public HashMap<Integer,ArrayList<String>> getOrdersWaiting(HashMap<Integer,ArrayList<String>> orders) throws NoOrdersWaitingException{
             return ordDao.getOrdersWaiting(orders);
+        }
+        public void setProducted(int id) throws InvalidOrderIdException{
+            ordDao.setProducted(id);
         }
      }
      

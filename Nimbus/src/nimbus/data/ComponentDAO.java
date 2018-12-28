@@ -183,5 +183,26 @@ public class ComponentDAO implements Map <String,Component> {
        
         
     }
+    public void removeStock (String nome,int stock){
+           try{
+            this.connection = Database.connect();
+            PreparedStatement state = connection.prepareStatement("UPDATE Componente SET stock=stock-? WHERE nome=?");
+            state.setInt(1,stock);
+            state.setString(2,nome);
+            state.executeUpdate();
+            
+        }
+        catch(SQLException e){
+            System.out.printf(e.getMessage());
+        }
+        finally{
+            try{
+                Database.close(connection);
+            }
+            catch(Exception e){
+                System.out.printf(e.getMessage());
+            }
+        }
+       }
     
 }
