@@ -25,10 +25,16 @@ INSERT INTO Componente VALUES(null,'Vidros fumados',0,100,'Pack Outside Tech(Bá
 INSERT INTO ListaComponente VALUES('1.0 TDCI 85c',1);
 INSERT INTO ListaComponente VALUES('Ti-VCT 85c',1);
 SELECT * FROM Componente;
+SELECT * FROM Encomenda;
+UPDATE Componente SET stock=0 WHERE nome='vidros fumados';
 
 INSERT INTO Pacote (nome,preco) VALUES ('nice',10);
 INSERT INTO ListaComponente (bancos,Pacote_nome,som,consola,luzes,leitor,vidros,escape,spoiler,teto,suporte,leds) VALUES (0,null,1,0,1,1,0,1,0,1,0,1);
-SELECT * FROM ListaComponente;
+
+SELECT * FROM Componente where Pacote_nome='Pack Inside Tech(Básico)';
+SELECT * FROM Componente where Pacote_nome='Pack Inside Tech 1(Intermédio)';
+SELECT * FROM Componente where Pacote_nome='Pack Outside Tech(Básico)';
+SELECT * FROM Componente where Pacote_nome='Pack Outside Tech 1(Intermédio)';
 
 SELECT idEncomenda FROM Encomenda ORDER BY idEncomenda DESC LIMIT 0, 1;
 

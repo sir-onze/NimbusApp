@@ -444,31 +444,39 @@ public class OrderFrame3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
     //BANCOS DESPORTIVOS
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        this.sportSeats = jCheckBox1.isEnabled();
+        this.sportSeats = jCheckBox1.isSelected();
     }//GEN-LAST:event_jCheckBox1ActionPerformed
     //VIDROS FUMADOS
     private void jCheckBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox7ActionPerformed
-        this.smokedWindows = jCheckBox7.isEnabled();
+        this.smokedWindows = jCheckBox7.isSelected();
     }//GEN-LAST:event_jCheckBox7ActionPerformed
     //ESCAPE
     private void jCheckBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox8ActionPerformed
-        this.exhaust = jCheckBox8.isEnabled();
+        this.exhaust = jCheckBox8.isSelected();
     }//GEN-LAST:event_jCheckBox8ActionPerformed
     //SPOILER
     private void jCheckBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox9ActionPerformed
-        this.spoiler = jCheckBox9.isEnabled();
+        this.spoiler = jCheckBox9.isSelected();
     }//GEN-LAST:event_jCheckBox9ActionPerformed
     //TETO DE ABRIR
     private void jCheckBox10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox10ActionPerformed
-        this.openheadroof = jCheckBox10.isEnabled();
+        this.openheadroof = jCheckBox10.isSelected();
+        if(openheadroof)
+            jCheckBox11.setEnabled(false);
+        if(openheadroof==false)
+            jCheckBox11.setEnabled(true);
     }//GEN-LAST:event_jCheckBox10ActionPerformed
     //SUPORTE DE BIKES
     private void jCheckBox11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox11ActionPerformed
-        this.bycicleSupport = jCheckBox11.isEnabled();
+        this.bycicleSupport = jCheckBox11.isSelected();
+        if(bycicleSupport)
+            jCheckBox10.setEnabled(false);
+        if(bycicleSupport==false)
+            jCheckBox10.setEnabled(true);
     }//GEN-LAST:event_jCheckBox11ActionPerformed
     //LEDS EXTERIORES
     private void jCheckBox12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox12ActionPerformed
-        this.externalNeonLeds = jCheckBox12.isEnabled();
+        this.externalNeonLeds = jCheckBox12.isSelected();
     }//GEN-LAST:event_jCheckBox12ActionPerformed
     //COMBOBOX COMP INT
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -494,23 +502,23 @@ public class OrderFrame3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
     //TETO ESTRELADO
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        this.starlight = jCheckBox2.isEnabled();
+        this.starlight = jCheckBox2.isSelected();
     }//GEN-LAST:event_jCheckBox2ActionPerformed
     //SISTEMA DE SOM
     private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
-        this.soundSystem = jCheckBox3.isEnabled();
+        this.soundSystem = jCheckBox3.isSelected();
     }//GEN-LAST:event_jCheckBox3ActionPerformed
     //CONSOLA CENTRAL
     private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
-        this.centralConsole = jCheckBox4.isEnabled();
+        this.centralConsole = jCheckBox4.isSelected();
     }//GEN-LAST:event_jCheckBox4ActionPerformed
     //LUZES INTERIORES
     private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
-        this.interiorLightsRGB = jCheckBox5.isEnabled();
+        this.interiorLightsRGB = jCheckBox5.isSelected();
     }//GEN-LAST:event_jCheckBox5ActionPerformed
     //DVD PASSAGEIROS
     private void jCheckBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox6ActionPerformed
-        this.passengersDVD = jCheckBox6.isEnabled();
+        this.passengersDVD = jCheckBox6.isSelected();
     }//GEN-LAST:event_jCheckBox6ActionPerformed
     //COMBOBOX PACOTES EXT
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
