@@ -359,4 +359,28 @@ public class OrderDAO implements Map <String,Order> {
             }
         }
        }
+        public ArrayList<Order> getAllOrdersW(){
+            ArrayList<Order> r = new ArrayList<>();
+           try{
+            this.connection = Database.connect();
+            PreparedStatement state = connection.prepareStatement("SELECT * FROM Encomenda WHERE estado=1");
+            ResultSet rs = state.executeQuery();
+            while(rs.next()){
+                r.add(new Order (new Client(rs.getString("Cliente_nome"),null,null,0,0),rs.getInt("idEncomenda"),rs.getInt("estado"),rs.getString("Funcionario_nome"),rs.getString("Modelo_nome"),null,null,null,null,rs.getInt("ListaComponente_id_lista")));
+            }
+            
+        }
+        catch(SQLException e){
+            System.out.printf(e.getMessage());
+        }
+        finally{
+            try{
+                Database.close(connection);
+            }
+            catch(Exception e){
+                System.out.printf(e.getMessage());
+            }
+       }
+           return r;
+        }
 }

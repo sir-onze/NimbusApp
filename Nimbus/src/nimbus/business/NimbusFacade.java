@@ -89,7 +89,9 @@ public class NimbusFacade{
     public ArrayList<Order> getAllOrders(){
            return ordH.getAllOrders();
        }
-    
+    public ArrayList<Order> getAllOrdersW(){
+           return ordH.getAllOrdersW();
+    }
     public HashMap<Integer,ArrayList<String>> getOrdersParts(ArrayList<Order> orders){
         return ordH.getOrdersParts(orders);
     }

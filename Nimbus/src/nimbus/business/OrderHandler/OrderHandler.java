@@ -113,6 +113,10 @@ public class OrderHandler {
         public void setProducted(int id) throws InvalidOrderIdException{
             ordDao.setProducted(id);
         }
+        
+        public ArrayList<Order> getAllOrdersW(){
+            return ordDao.getAllOrdersW();
+        }
      }
      
   
