@@ -2,6 +2,8 @@ package nimbus.interaction;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import nimbus.business.*;
 import nimbus.business.OrderHandler.Component;
 import nimbus.business.OrderHandler.InvalidComponentException;
@@ -344,45 +346,37 @@ public class FactoryFrame extends javax.swing.JFrame {
         String aux_stock = jTextField3.getText();
         int id=0;
          if(!nome.equals("") && !aux_stock.equals("")){
+             int stock = Integer.parseInt(aux_stock);
+             jTextField3.setText("");
+             jTextField3.setText(String.valueOf(stock));
+             jTextField2.setText("");
+             jTextField3.setText("");
+             jTextField5.setText("");
+             /* segunda parte onde se irá verificar se a peça adicionado coloca alguma encomenda em estado de ser produzida*/
+             //construção do hashmap this.nimbus.getOrdersParts();
+             ArrayList <Order> allOrders = this.nimbus.getAllOrdersW();
+             HashMap <Integer,ArrayList<String>> ordersParts = new HashMap <Integer,ArrayList<String>>();
+             ordersParts = this.nimbus.getOrdersParts(allOrders);
              try{
-           int stock = Integer.parseInt(aux_stock);
-           jTextField3.setText("");
-           jTextField3.setText(String.valueOf(stock));
-           jTextField2.setText("");
-           jTextField3.setText("");
-           jTextField5.setText("");
-         /* segunda parte onde se irá verificar se a peça adicionado coloca alguma encomenda em estado de ser produzida*/
-         //construção do hashmap this.nimbus.getOrdersParts();
-         ArrayList <Order> allOrders = this.nimbus.getAllOrdersW();
-         HashMap <Integer,ArrayList<String>> ordersParts = new HashMap <Integer,ArrayList<String>>();
-         ordersParts = this.nimbus.getOrdersParts(allOrders);
-         try{
-             this.parts = this.nimbus.getOrdersWaiting(ordersParts);
-         //verificação
-        for(Map.Entry<Integer, ArrayList<String>> entry : this.parts.entrySet()){
-            System.out.println("frame"+entry.getValue().get(0)+entry.getValue().size()+nome);
-            if(entry.getValue().contains(nome) && entry.getValue().size()==1){
-            id=entry.getKey();
-            System.out.println(id);
-            break;
-            }
-        }
-        this.nimbus.updateStock(nome, stock);
-        jLabel6.setText("Stock adicionado");
-        if(id!=0){
-            jLabel6.setText("Encomenda "+id+" produzida"
-                      );
-        }
-
-            }
-         catch(NoOrdersWaitingException e){
-               jLabel6.setText("Não existem encomendas que necessitem desta peça"
-                      );
+                 this.parts = this.nimbus.getOrdersWaiting(ordersParts);
+                 
+                 //verificação
+                 id = this.nimbus.produceAfterStock(this.parts,nome);
+                 this.nimbus.adjustStock(id);
+                 jLabel6.setText("Stock adicionado");
+                 if(id!=0){
+                     this.nimbus.setProducted(id);
+                     jLabel6.setText("Encomenda "+id+" produzida"
+                     );
                  }
+                 
+             }
+             catch(NoOrdersWaitingException e){
+                 jLabel6.setText("Não existem encomendas que necessitem desta peça"
+                 );
+             } catch (InvalidOrderIdException ex) {
+                Logger.getLogger(FactoryFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
-            catch(InvalidComponentException e){
-                    jLabel6.setText("Componente inexistente");
-                    }
          }
          else jLabel6.setText("Preencha os campos obrigatórios");
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -425,14 +419,25 @@ public class FactoryFrame extends javax.swing.JFrame {
         if(!id_aux.equals("")){
             
         try{
+        HashMap <Integer,ArrayList<String>> ordersParts = new HashMap <Integer,ArrayList<String>>();
+        ArrayList <Order> allOrders = this.nimbus.getAllOrdersW();
+        ordersParts = this.nimbus.getOrdersParts(allOrders);
+        this.parts = this.nimbus.getOrdersWaiting(ordersParts);
         int id = Integer.parseInt(id_aux);
+        if(this.nimbus.isReadytoProduce(parts, id)==1){
         this.nimbus.setProducted(id);
         this.nimbus.adjustStock(id);
         jLabel6.setText("Encomenda produzida");
+        }
+        else jLabel6.setText("Peças em Falta");
+        
     }
         catch(InvalidOrderIdException e){
             jLabel6.setText("Encomenda Inexistente");
-        }
+            
+        }   catch (NoOrdersWaitingException ex) {
+                jLabel6.setText("Encomenda Inexistente");
+            }
   
         }
         else jLabel6.setText("Preencha campos obrigatórios");

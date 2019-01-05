@@ -2,6 +2,7 @@ package nimbus.business;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import nimbus.business.OrderHandler.InvalidClientException;
 import nimbus.business.OrderHandler.*;
 import nimbus.business.EmployeeHandler.*;
@@ -105,4 +106,24 @@ public class NimbusFacade{
     public void adjustStock(int id){
         ordH.adjustStock(id);
     }
+    
+    public int produceAfterStock(HashMap <Integer,ArrayList<String>>parts,String nome){ 
+          int id =0;
+          for(Map.Entry<Integer, ArrayList<String>> entry : parts.entrySet()){
+//            System.out.println("frame"+entry.getValue().get(0)+entry.getValue().size()+nome);
+            if(entry.getValue().contains(nome) && entry.getValue().size()==1){
+            id=entry.getKey();
+            System.out.println(id);
+            break;
+            } 
+        
+    }
+          return id;
+}
+        public int isReadytoProduce(HashMap <Integer,ArrayList<String>>parts,int OrderId){ 
+          int r =0;
+          if(parts.get(OrderId).size()==0) r=1;
+          return r;
+}
+    
 }
