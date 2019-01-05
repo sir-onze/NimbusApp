@@ -283,14 +283,14 @@ public class OrderFrame4 extends javax.swing.JFrame {
 
         jPanel17.setBackground(new java.awt.Color(145, 0, 0));
 
-        jButton2.setText("Finalizar Encomenda");
+        jButton2.setText("Confirmar Encomenda");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Consultar Preço");
+        jButton1.setText("Sair");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -302,10 +302,10 @@ public class OrderFrame4 extends javax.swing.JFrame {
         jPanel17Layout.setHorizontalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGap(307, 307, 307)
+                .addGap(14, 14, 14)
                 .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addGap(311, 311, 311)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                 .addGap(24, 24, 24))
         );
         jPanel17Layout.setVerticalGroup(
@@ -401,8 +401,8 @@ public class OrderFrame4 extends javax.swing.JFrame {
         int orderId = this.nimbus.getOrderId();
         Order order = new Order(this.client,orderId,1,this.nimbus.getEmployee().getUsername(),this.model,this.paint,this.tires,this.wheels,this.engine,listId);
         this.nimbus.addOrder(null, order);
-        
         EmployeeFrame frame = new EmployeeFrame(this.nimbus);
+        
         frame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed

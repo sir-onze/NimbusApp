@@ -117,6 +117,20 @@ public class OrderHandler {
         public ArrayList<Order> getAllOrdersW(){
             return ordDao.getAllOrdersW();
         }
+        
+        public void adjustStock(int id){
+        ArrayList <Order> order = new ArrayList();
+        HashMap <Integer,ArrayList<String>> parts = new HashMap();
+        ArrayList<String> orderParts = new ArrayList();
+        order = ordDao.getAllOrders();
+        parts = ordDao.getOrdersParts(order);
+        
+        orderParts = parts.get(id);
+        
+        for(String nome:orderParts){
+             this.compDao.removeStock(nome,1);
+        }
+        }
      }
      
   

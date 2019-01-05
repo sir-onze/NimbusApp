@@ -280,7 +280,7 @@ public class OrderDAO implements Map <String,Order> {
                     if(rs.getInt("leds")==1);list.add("Led's Neon Externos");
                     retur.put(temp.getOrderId(),list);
                 }
-                System.out.println(list.get(1));
+                
             }
             
         }
@@ -297,6 +297,8 @@ public class OrderDAO implements Map <String,Order> {
        }
               return retur ;
        }
+       
+       
        public HashMap<Integer,ArrayList<String>> getOrdersWaiting(HashMap<Integer,ArrayList<String>> orders){
            ArrayList <String> list= null;
            ArrayList<String> aux = new ArrayList<String>();
@@ -359,6 +361,7 @@ public class OrderDAO implements Map <String,Order> {
             }
         }
        }
+       
         public ArrayList<Order> getAllOrdersW(){
             ArrayList<Order> r = new ArrayList<>();
            try{
@@ -383,4 +386,6 @@ public class OrderDAO implements Map <String,Order> {
        }
            return r;
         }
+        
+  
 }

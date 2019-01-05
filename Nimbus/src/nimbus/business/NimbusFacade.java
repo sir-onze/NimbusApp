@@ -101,4 +101,8 @@ public class NimbusFacade{
     public void setProducted(int id) throws InvalidOrderIdException{
         ordH.setProducted(id);
     }
+    
+    public void adjustStock(int id){
+        ordH.adjustStock(id);
+    }
 }
